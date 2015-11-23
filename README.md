@@ -7,7 +7,7 @@
 >      这里我将根据面向对象设计的方式来写一个小demo，根据反射来载入不同的类，使系统具有比较好的扩展性。
 
 首先设计一个接口:
-
+```java
     package cc.hao.reflect;
     
     import java.util.List;
@@ -17,10 +17,10 @@
     	public List<String> act(List<String> params);
     	
     }
-
+```
 
 接下来为不同的功能编写不同的类，继承Action接口，针对接口编程。
-
+```java
     //Store类
     package cc.hao.reflect;
     
@@ -52,7 +52,7 @@
     	}
     
     }
-
+```
 ... 我们会需要编写很多的类，每次具体化哪个类呢？如果向程序传递一个参数，然后让它去自行实例化，执行它的act()方法，那就可以避免以后的麻烦了。
 
 利用反射，一切都迎刃而解。
@@ -65,7 +65,7 @@
 
 
 然后我们利用反射来进行动态加载调用
-
+```java
     package cc.hao.reflect;
     
     import java.io.FileInputStream;
@@ -118,9 +118,9 @@
     测试结果：
     Java DynamicLoad 100  | [this is load]
     Java DynamicLoad 200  | [this is search]
-
+    ```
 接下来我们再来看一段代码：
-
+```java
     package cc.hao.reflection;
     
     import java.lang.reflect.Field;
@@ -202,13 +202,12 @@
     	}
     	
     }
-
+```
 这里我们通过反射来复制一个Customer对象。我建议您认真阅读关于涉及到的API的文档，着重理解
-
+```java
     Object objCopy = clazz.getConstructor(new Class[]{}).newInstance();
     Method setMethod = clazz.getMethod(setMethodName, new Class[]{field.getType()});
-
+```
 里的参数含义，这里就不在多说了。
 
-对于反射一直是很多人不甚理解的地方，参考了一些网上的文章，希望通过一些简单的例子引导您加深对反射的认识，写的比较肤浅，不对之处还请您指正。
  
